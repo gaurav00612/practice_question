@@ -1,0 +1,35 @@
+# Linux system files
+.directory
+.Trash-*
+.nfs*
+
+# Shell history and logs (if you are practicing bash)
+*.log
+.bash_history
+.bash_profile
+
+# OS-specific metadata folders
+.DS_Store
+Thumbs.db
+
+# Any specific folder you want to block (Example: backup folders)
+backups/
+
+# AWS private keys and certificates
+*.pem
+*.key
+id_rsa
+id_dsa
+
+# AWS credentials and config files
+.aws/
+credentials.json
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+
+# Environment variables
+.env
+
+
