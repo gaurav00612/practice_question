@@ -1,5 +1,8 @@
 #!/bin/bash
 
+service_status
+backup_status
+
 
 if [ $# -eq 1 ];then 
  echo "Please provide the source"
@@ -21,7 +24,12 @@ check_service() {
 	if [ "$status" == 'active' ];then
 		echo "[$(date +%F)] Checking service..."
 		echo "$2 is running"
+		$service_status=$?
+	else
+		echo "$2 service is not running"
+                exit 2
 	fi
+
 
 }
 
@@ -33,14 +41,23 @@ create_backup() {
 
 		echo "[$(date +%F)] Creating backup..."
                 echo "Backup successful"
+		$backup_status=$?
+
+	  else
+                echo "$1 directory is not exist"
+                exit 2
 	fi
 
 }
 
 check_service "$1" "$2"
 create_backup "$1"
-
 echo "================================="
-echo "Automation completed successfully"
+if [ $service_status -eq 0 ] && [ $backup_status -eq 0 ]; then
+    echo "Automation completed successfully"
+    exit 0
+else
+    echo "Automation failed"
+    exit 3
+fi
 echo "================================="
-
